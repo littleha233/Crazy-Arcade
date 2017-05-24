@@ -49,7 +49,6 @@ private:
 	CCScene* mSceneRoot;
 	class CBeginScene* mBeginScene;
 	class CPlayScene* mPlayScene;
-	class CEndScene* mEndScene;
 	class CBaseScene* mCurrentScene;
 };
 

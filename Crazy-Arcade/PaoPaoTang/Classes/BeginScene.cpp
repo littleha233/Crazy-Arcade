@@ -21,7 +21,7 @@ void CBeginScene::onEnterScene()
 /**************动画小测试*****************/
 	loadAni();//加载动画
 	
-	CCAnimation* animation=CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Role1.png3");//提取动画
+	CCAnimation* animation=CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Role2.png3");//提取动画
 	CCAnimate* animate=CCAnimate::create(animation);//创建动作
 	CCSprite* sp=CCSprite::create();
 	sp->setPosition(ccp(FRAME_WIDTH/6,FRAME_HEIGHT/6));

@@ -4,7 +4,6 @@
 #include "SimpleAudioEngine.h"
 #include "BeginScene.h"
 #include "PlayScene.h"
-#include "EndScene.h"
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -37,7 +36,6 @@ bool GameLogic::applicationDidFinishLaunching()
 	mSceneRoot = CCScene::create();
 	mBeginScene = new CBeginScene();
 	mPlayScene = new CPlayScene();
-	mEndScene = new CEndScene();
 
 
 	mSceneRoot->addChild(mBeginScene->getRootLayer());
