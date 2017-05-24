@@ -139,7 +139,6 @@
     <ClInclude Include="..\Classes\BaseDef.h" />
     <ClInclude Include="..\Classes\BaseScene.h" />
     <ClInclude Include="..\Classes\BeginScene.h" />
-    <ClInclude Include="..\Classes\EndScene.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
     <ClInclude Include="..\Classes\GameUtils.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
@@ -153,7 +152,6 @@
   <ItemGroup>
     <ClCompile Include="..\Classes\Animation.cpp" />
     <ClCompile Include="..\Classes\BeginScene.cpp" />
-    <ClCompile Include="..\Classes\EndScene.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\PlayScene.cpp" />
