@@ -9,7 +9,7 @@ using namespace cocos2d;
 
 The reason for implement as private inheritance is to hide some interface call by CCDirector.
 */
-class  GameLogic : private cocos2d::CCApplication
+class  GameLogic : private cocos2d::CCApplication,private CCObject
 {
 public:
     GameLogic();
@@ -45,6 +45,8 @@ public:
 	{
 		return ((GameLogic&)CCApplication::sharedApplication());
 	}
+private:
+	virtual void update(float dt);
 private:
 	CCScene* mSceneRoot;
 	class CBeginScene* mBeginScene;
