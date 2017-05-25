@@ -16,13 +16,15 @@ enum EControllType
 
 enum EPressState
 {
+	EPS_NONE,
 	EPS_DOWN,
 	EPS_UP
 };
 
-enum EBeginSceneEvent
+enum ESceneSwitchEvent
 {
-	EBSE_Play
+	ESSE_Play,
+	ESSE_Exit,
+	ESSE_Back2Menu
 };
-
 #endif

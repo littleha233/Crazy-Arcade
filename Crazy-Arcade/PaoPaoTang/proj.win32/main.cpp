@@ -9,7 +9,7 @@ USING_NS_CC;
 
 void MY_LPFN_ACCELEROMETER_KEYHOOK( UINT message,WPARAM wParam, LPARAM lParam )
 {
-	GameLogic::sharedGameLogic().handleInput(ECT_NONE,EPS_DOWN);
+	GameLogic::sharedGameLogic().handleInput(ECT_NONE,EPS_NONE);
 }
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
