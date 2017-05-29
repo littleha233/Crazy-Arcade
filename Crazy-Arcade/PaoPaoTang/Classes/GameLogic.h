@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "BaseDef.h"
+#include "Animation.h"
 using namespace cocos2d;
 /**
 @brief    The cocos2d Application.
@@ -34,10 +35,7 @@ public:
     */
     virtual void applicationWillEnterForeground();
 
-	void handleInput(EControllType ectType,EPressState epState)
-	{
-
-	}
+	void handleInput(EControlType ectType, EPressState epState);
 
 	void handleEvent(int eventType,void* data = NULL);
 
