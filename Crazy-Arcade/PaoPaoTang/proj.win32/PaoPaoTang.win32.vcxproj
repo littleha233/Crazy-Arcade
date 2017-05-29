@@ -143,6 +143,7 @@
     <ClInclude Include="..\Classes\GameUtils.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\MenuSelectHandler.h" />
+    <ClInclude Include="..\Classes\player.h" />
     <ClInclude Include="..\Classes\PlayScene.h" />
     <ClInclude Include="..\Classes\tinystr.h" />
     <ClInclude Include="..\Classes\tinyxml.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="..\Classes\BeginScene.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\player.cpp" />
     <ClCompile Include="..\Classes\PlayScene.cpp" />
     <ClCompile Include="..\Classes\tinystr.cpp" />
     <ClCompile Include="..\Classes\tinyxml.cpp" />

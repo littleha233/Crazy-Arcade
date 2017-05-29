@@ -27,16 +27,7 @@ void CBeginScene::onEnterScene()
 	CCMenu* pMenu = CCMenu::create(play_labelItem,exit_labelItem,title_labelItem,NULL);
 	pMenu->setPosition(CCPointZero);
 	mRootLayer->addChild(pMenu,1);
-/**************动画小测试*****************/
-	loadAni();//加载动画
-	
-	CCAnimation* animation=CCAnimationCache::sharedAnimationCache()->animationByName("morePic/custom_bubble_98.png0");//提取动画
-	CCAnimate* animate=CCAnimate::create(animation);//创建动作
-	CCSprite* sp=CCSprite::create();
-	sp->setPosition(ccp(FRAME_WIDTH/2,FRAME_HEIGHT*0.7));
-	mRootLayer->addChild(sp);
-	sp->runAction(animate);
-/**************动画小测试*****************/
+
 }
 
 void CBeginScene::onExitScene()
