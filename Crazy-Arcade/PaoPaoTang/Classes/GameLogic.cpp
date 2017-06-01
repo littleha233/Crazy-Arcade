@@ -33,7 +33,14 @@ bool GameLogic::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
 	
+
+
+	/*****加载动画****/
+	loadAni();
+	/*****加载动画****/
 	//
+
+
 	pDirector->getScheduler()->scheduleUpdateForTarget(this,0,false);
 
 	mSceneRoot = CCScene::create();
@@ -63,6 +70,12 @@ void GameLogic::applicationWillEnterForeground()
     CCDirector::sharedDirector()->startAnimation();
 
     SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+}
+
+void GameLogic::handleInput(EControlType ectType, EPressState epState)
+{
+	if(mCurrentScene==mPlayScene)
+		mPlayScene->handleInput(ectType, epState);
 }
 
 void GameLogic::handleEvent( int eventType,void* data /*= NULL*/ )
