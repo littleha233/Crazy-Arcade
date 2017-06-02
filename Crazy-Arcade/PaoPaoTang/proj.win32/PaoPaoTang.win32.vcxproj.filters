@@ -17,6 +17,9 @@
     <Filter Include="Classes\XML">
       <UniqueIdentifier>{d03368f7-91c7-42ad-9351-4471cb708806}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameObject">
+      <UniqueIdentifier>{a0d83ce7-eab5-4180-82b2-4c047ce8d269}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\PaoPaoTang.ico">
@@ -59,9 +62,6 @@
     <ClInclude Include="..\Classes\GameLogic.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EndScene.h">
-      <Filter>Classes\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\PlayScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
@@ -89,6 +89,9 @@
     <ClInclude Include="..\Classes\Animation.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\player.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -101,9 +104,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BeginScene.cpp">
-      <Filter>Classes\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EndScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PlayScene.cpp">
@@ -123,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Animation.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\player.cpp">
+      <Filter>Classes\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
