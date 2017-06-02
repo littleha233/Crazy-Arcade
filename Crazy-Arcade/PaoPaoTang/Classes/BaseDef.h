@@ -16,6 +16,15 @@ enum EControlType
 	ECT_NUM
 };
 
+enum EMoveDirection
+{
+	EMD_UP,
+	EMD_DOWN,
+	EMD_LEFT,
+	EMD_RIGHT,
+	EMD_NUM
+};
+
 enum EPressState
 {
 	EPS_NONE,
