@@ -11,6 +11,7 @@
 #include"cocos2d.h"
 #include "BaseDef.h"
 #include <string>
+#include "map.h"
 
 class CPlayer :public cocos2d::CCNode
 {
@@ -19,6 +20,8 @@ public:
 	CPlayer();
 	//获取精灵
 	cocos2d::CCSprite* getSprite();
+	//获取当前地图
+	void setMap(CMap*);
 	//走动函数
 	void move(EControlType);
 	//停下
@@ -29,7 +32,11 @@ public:
 	void dead();
 	//键盘控制
 	void handleInput(EControlType,EPressState);
-//销毁retain精灵
+	//更新函数
+	void myUpdate(float dt);
+	//碰撞检测函数
+	cocos2d::CCPoint posFlag();
+	//销毁retain精灵
 	~CPlayer();
 
 private:
@@ -40,6 +47,10 @@ private:
 	void handleUp(EControlType);
 	//改变主角状态
 	bool changeState(EPlayerLogicState);
+	//碰撞后回退
+	void backPos();
+	//边界检测
+	bool isInBorder();
 	
 
 
@@ -50,6 +61,7 @@ private:
 	
 	/****状态表测试******/
 	EPlayerLogicState m_currentState;//当前状态
+	EControlType m_moveDirection;//记录移动时的方向
 	bool m_rgStateTable[EPLS_NUM][EPLS_NUM];//状态表
 	/*************/
 
@@ -57,6 +69,7 @@ private:
 	cocos2d::CCSprite* m_pHero;//主角精灵指针
 	cocos2d::CCAnimate* m_pAnimate;//当前动画
 	cocos2d::CCMoveBy* m_pMoveBy;//当前移动动作
+	CMap* m_pCurrentMap;//当前加载地图
 
 	
 
