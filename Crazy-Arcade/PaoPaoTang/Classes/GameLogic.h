@@ -3,13 +3,14 @@
 
 #include "cocos2d.h"
 #include "BaseDef.h"
+#include "Animation.h"
 using namespace cocos2d;
 /**
 @brief    The cocos2d Application.
 
 The reason for implement as private inheritance is to hide some interface call by CCDirector.
 */
-class  GameLogic : private cocos2d::CCApplication
+class  GameLogic : private cocos2d::CCApplication,private CCObject
 {
 public:
     GameLogic();
@@ -34,10 +35,7 @@ public:
     */
     virtual void applicationWillEnterForeground();
 
-	void handleInput(EControllType ectType,EPressState epState)
-	{
-
-	}
+	void handleInput(EControlType ectType, EPressState epState);
 
 	void handleEvent(int eventType,void* data = NULL);
 
@@ -45,6 +43,8 @@ public:
 	{
 		return ((GameLogic&)CCApplication::sharedApplication());
 	}
+private:
+	virtual void update(float dt);
 private:
 	CCScene* mSceneRoot;
 	class CBeginScene* mBeginScene;

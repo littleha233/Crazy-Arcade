@@ -32,6 +32,16 @@ bool GameLogic::applicationDidFinishLaunching()
 
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
+	
+
+
+	/*****加载动画****/
+	loadAni();
+	/*****加载动画****/
+	//
+
+
+	pDirector->getScheduler()->scheduleUpdateForTarget(this,0,false);
 
 	mSceneRoot = CCScene::create();
 	mBeginScene = new CBeginScene();
@@ -62,7 +72,56 @@ void GameLogic::applicationWillEnterForeground()
     SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
 }
 
+void GameLogic::handleInput(EControlType ectType, EPressState epState)
+{
+	if(mCurrentScene==mPlayScene)
+		mPlayScene->handleInput(ectType, epState);
+}
+
 void GameLogic::handleEvent( int eventType,void* data /*= NULL*/ )
 {
-	mCurrentScene->onHandleEvent(eventType,data);
+	switch(eventType)
+	{
+	case ESSE_Play:
+		{
+			mCurrentScene->onExitScene();
+			mSceneRoot->removeChild(mCurrentScene->getRootLayer(),false);
+			mCurrentScene = mPlayScene;
+			mSceneRoot->addChild(mCurrentScene->getRootLayer());
+			mCurrentScene->onEnterScene();
+			return;
+		}
+	case ESSE_Exit:
+		{
+			mCurrentScene->onExitScene();
+			mCurrentScene = NULL;
+			CCDirector::sharedDirector()->end();
+
+			delete mBeginScene;
+			mBeginScene = NULL;
+			delete mPlayScene;
+			mPlayScene = NULL;
+			return;
+		}
+	case ESSE_Back2Menu:
+		{
+			mCurrentScene->onExitScene();
+			mSceneRoot->removeChild(mCurrentScene->getRootLayer(),false);
+			mCurrentScene = mBeginScene;
+			mSceneRoot->addChild(mCurrentScene->getRootLayer());
+			mCurrentScene->onEnterScene();
+			return;
+		}
+	}
+	if(mCurrentScene)
+		mCurrentScene->onHandleEvent(eventType,data);
+}
+
+void GameLogic::update( float dt )
+{
+	//to do..
+
+	//...
+	if(mCurrentScene)
+		mCurrentScene->onUpdate(dt);
 }

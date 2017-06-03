@@ -11,6 +11,10 @@ public:
 		
 	}
 	virtual void onEnterScene();
-	virtual void onExitScene(){}
+	virtual void onExitScene();
+	virtual void onUpdate(float dt)
+	{
+
+	}
 };
 #endif

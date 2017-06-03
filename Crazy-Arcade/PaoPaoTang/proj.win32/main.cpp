@@ -7,10 +7,48 @@ USING_NS_CC;
 // uncomment below line, open debug console
 // #define USE_WIN32_CONSOLE
 
-void MY_LPFN_ACCELEROMETER_KEYHOOK( UINT message,WPARAM wParam, LPARAM lParam )
+/****º¸≈Ãº‡øÿ≤‚ ‘*****/
+void MY_LPFN_ACCELEROMETER_KEYHOOK(UINT message, WPARAM wParam, LPARAM lParam)
 {
-	GameLogic::sharedGameLogic().handleInput(ECT_NONE,EPS_DOWN);
+	EControlType eCtrlType = ECT_NUM;
+	EPressState ePrsState = EPS_NONE;
+
+	switch (message)
+	{
+	case WM_KEYDOWN:
+	case WM_KEYUP:
+	{
+		if (WM_KEYDOWN == message)
+			ePrsState = EPS_DOWN;
+		else
+			ePrsState = EPS_UP;
+		switch (wParam)
+		{
+		case 'w':
+		case 'W':
+			eCtrlType = ECT_UP; break;
+		case 's':
+		case 'S':
+			eCtrlType = ECT_DOWN; break;
+		case 'a':
+		case 'A':
+			eCtrlType = ECT_LEFT; break;
+		case 'd':
+		case 'D':
+			eCtrlType = ECT_RIGHT; break;
+		case VK_SPACE:
+			eCtrlType = ECT_PRESS; break;
+		}
+		break;
+	}
+	}
+
+
+
+
+	((GameLogic&)CCApplication::sharedApplication()).handleInput(eCtrlType, ePrsState);
 }
+/****º¸≈Ãº‡øÿ≤‚ ‘*****/
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                        HINSTANCE hPrevInstance,
                        LPTSTR    lpCmdLine,

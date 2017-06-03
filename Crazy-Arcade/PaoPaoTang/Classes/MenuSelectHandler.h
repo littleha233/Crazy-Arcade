@@ -17,9 +17,17 @@ public:
 		return instance;
 	}
 public:
-	void beginScene_PlayItem(CCObject* sender)
+	void onMenu_Play(CCObject* pSender)
 	{
-		GameLogic::sharedGameLogic().handleEvent(EBSE_Play);
+		GameLogic::sharedGameLogic().handleEvent(ESSE_Play);
+	}
+	void onMenu_Exit(CCObject* pSender)
+	{
+		GameLogic::sharedGameLogic().handleEvent(ESSE_Exit);
+	}
+	void onMenu_Back2Menu(CCObject* pSender)
+	{
+		GameLogic::sharedGameLogic().handleEvent(ESSE_Back2Menu);
 	}
 };
 #endif
