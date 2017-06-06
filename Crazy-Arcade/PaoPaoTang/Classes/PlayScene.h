@@ -18,7 +18,6 @@ public:
 
 	}
 
-
 	/*****¼üÅÌ¼àÌı********/
 	void handleInput(EControlType eCtrlType, EPressState ePrsState);
 

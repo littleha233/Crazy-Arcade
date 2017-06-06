@@ -10,8 +10,8 @@
 
 #define ITV_UP 10.0 //碰撞检测时向上间隔
 #define ITV_DOWN 0.0 //碰撞检测时向下间隔
-#define ITV_LEFT 10.0 //碰撞检测时向左间隔
-#define ITV_RIGHT 10.0 //碰撞检测时向右间隔
+#define ITV_LEFT 20.0 //碰撞检测时向左间隔
+#define ITV_RIGHT 20.0 //碰撞检测时向右间隔
 #define CONTENT_WIDTH 800 //游戏界面宽度
 #define CONTENT_HEIGHT 600 //游戏界面高度
 
@@ -35,7 +35,7 @@ CPlayer::CPlayer():
 	m_pHero = CCSprite::create("Pic/Role1.png", CCRectMake(0, 256 / 4, 288 / 6, 256 / 4));
 	m_pHero->retain();
 	m_pHero->setAnchorPoint(ccp(0.5, 0.1));
-	m_pHero->setPosition(ccp(size.width / 2, size.height / 2+50));
+	m_pHero->setPosition(ccp(40,40));
 	//设置update监听
 	CCNode::onEnter();
 	this->schedule(schedule_selector(CPlayer::myUpdate));
@@ -63,6 +63,7 @@ CCSprite * CPlayer::getSprite()
 void CPlayer::setMap(CMap* amap)
 {
 	m_pCurrentMap = amap;
+	setBornPosition();
 }
 
 void CPlayer::move(EControlType eCtrlType)
@@ -216,10 +217,20 @@ bool CPlayer::isInBorder()
 	pos.x = m_pHero->getPositionX();
 	pos.y = m_pHero->getPositionY();
 
-	if (pos.x<CONTENT_WIDTH - ITV_RIGHT*2 && pos.y<CONTENT_HEIGHT-ITV_UP*2 && pos.x>ITV_LEFT*2 && pos.y>ITV_DOWN*2)
+	if (pos.x<CONTENT_WIDTH - ITV_RIGHT -5 && pos.y<CONTENT_HEIGHT-ITV_UP*2 && pos.x>ITV_LEFT && pos.y>ITV_DOWN*2)
 		return true;
 	else
 	return false;
+}
+
+void CPlayer::setBornPosition()
+{
+	CCTMXTiledMap* map = this->m_pCurrentMap;
+	CCTMXObjectGroup* group = map->objectGroupNamed("object1");
+	CCDictionary* dictionary = group->objectNamed("born1");
+	float x = dictionary->valueForKey("x")->floatValue();
+	float y = dictionary->valueForKey("y")->floatValue();
+	m_pHero->setPosition(ccp(x, y));
 }
 
 CPlayer::~CPlayer()
