@@ -1,8 +1,8 @@
 #ifndef _BASE_DEF_H_
 #define _BASE_DEF_H_
 
-#define FRAME_WIDTH 600
-#define FRAME_HEIGHT 450
+#define FRAME_WIDTH 800
+#define FRAME_HEIGHT 600
 
 #define ROLE "Pic/Role1.png"
 
