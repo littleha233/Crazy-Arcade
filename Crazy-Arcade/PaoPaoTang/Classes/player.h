@@ -36,6 +36,8 @@ public:
 	void myUpdate(float dt);
 	//碰撞检测函数
 	cocos2d::CCPoint posFlag();
+	//设置出生点
+	void setBornPosition();
 	//销毁retain精灵
 	~CPlayer();
 
