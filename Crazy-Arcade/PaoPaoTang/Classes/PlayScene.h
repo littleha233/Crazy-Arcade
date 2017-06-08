@@ -3,6 +3,7 @@
 #include "cocos2d.h"
 #include "BaseScene.h"
 #include "player.h"
+#include "map.h"
 using namespace cocos2d;
 
 class CPlayScene:public CBaseScene
@@ -16,7 +17,6 @@ public:
 	{
 
 	}
-
 
 	/*****¼üÅÌ¼àÌý********/
 	void handleInput(EControlType eCtrlType, EPressState ePrsState);

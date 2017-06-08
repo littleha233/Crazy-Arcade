@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="bcg" tilewidth="40" tileheight="40">
+  <image source="Pic/SandGround.png" width="80" height="40"/>
+ </tileset>
+ <tileset firstgid="3" name="ta" tilewidth="80" tileheight="80">
+  <image source="morePic/map_sea_tile1.png" width="80" height="80"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="4" name="collision" tilewidth="40" tileheight="57">
+  <image source="Pic/someobjects.png" width="120" height="57"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Collidable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="bcg" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+  </data>
+ </layer>
+ <layer name="ta" width="20" height="15">
+  <properties>
+   <property name="Collidable" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4C6gHmgHTAKhi0AAAvEAAQ=
+  </data>
+ </layer>
+ <objectgroup name="object1">
+  <object name="born1" x="44" y="43" width="32" height="30">
+   <properties>
+    <property name="x" value="60.00"/>
+    <property name="y" value="530.00"/>
+   </properties>
+  </object>
+  <object name="born2" x="725" y="523" width="32" height="36">
+   <properties>
+    <property name="x" value="740"/>
+    <property name="y" value="50"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="collision" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAAViBmIxOzMmACFqg4OZgFyRxkPrI4AxYxfPIw98Dci0sfsWzk8MLmf2LdBwPo5qH7GZlGxrjUYHMfLrMYsPDR6VH/YgeU+hefGcSkP2rnD3Q7KM2/MECt8gUAnf0DOw==
+  </data>
+ </layer>
+</map>
