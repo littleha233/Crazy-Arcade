@@ -5,8 +5,10 @@
 
 
 
+
+
 CPlayScene::CPlayScene():
-	hero()
+hero()
 {
 }
 
@@ -27,7 +29,7 @@ void CPlayScene::onEnterScene()
 	CMap* amap = CMap::initTileMap("amap.tmx");
 	hero.setMap(amap);
 	mRootLayer->addChild(amap,1);
-	amap->addChild(hero.getSprite(), 2);
+	amap->addChild(hero.getSprite(),3);
 	/**************∂Øª≠–°≤‚ ‘*****************/
 
 	CCLabelTTF* back_label = CCLabelTTF::create(CStringTableMgr::getString("main_menu"),"Arial",24);

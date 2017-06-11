@@ -8,33 +8,29 @@
 
 #include "player.h"
 
-#define ITV_UP 10.0 //碰撞检测时向上间隔
-#define ITV_DOWN 0.0 //碰撞检测时向下间隔
-#define ITV_LEFT 20.0 //碰撞检测时向左间隔
-#define ITV_RIGHT 20.0 //碰撞检测时向右间隔
-#define CONTENT_WIDTH 800 //游戏界面宽度
-#define CONTENT_HEIGHT 600 //游戏界面高度
+
 
 
 using namespace cocos2d;
 
 
+
 CPlayer::CPlayer():
 	m_iMaxBombNum(1),
 	m_iSettledBobNum(0),
-	m_iBombScale(1),
+	m_iBombScale(3),
 	m_iSpeed(3),
 	m_pHero(NULL),
 	m_pAnimate(NULL),
 	m_currentState(EPLS_STAND),
-	m_pCurrentMap(NULL),
-	m_moveDirection(ECT_NUM)
+	m_moveDirection(ECT_NUM),
+	m_pCurrentMap(NULL)
 {
 	
 	CCSize size = CCDirector::sharedDirector()->getWinSize();
 	m_pHero = CCSprite::create("Pic/Role1.png", CCRectMake(0, 256 / 4, 288 / 6, 256 / 4));
 	m_pHero->retain();
-	m_pHero->setAnchorPoint(ccp(0.5, 0.1));
+	m_pHero->setAnchorPoint(ccp(0.5, 0.3));
 	m_pHero->setPosition(ccp(40,40));
 	//设置update监听
 	CCNode::onEnter();
@@ -95,6 +91,11 @@ void CPlayer::stop(EControlType eCtrlType)
 	m_pHero->stopAction(m_pMoveBy);
 }
 
+void CPlayer::setBomb()
+{
+	CBomb* bomb = CBomb::create(m_pHero->getPosition(), m_pCurrentMap,this);
+}
+
 void CPlayer::handleInput(EControlType eCtrlType, EPressState ePrsState)
 {
 	switch (ePrsState)
@@ -112,8 +113,11 @@ void CPlayer::handleInput(EControlType eCtrlType, EPressState ePrsState)
 
 void CPlayer::myUpdate(float dt)
 {
-	if (m_currentState == EPLS_MOVE &&  m_pCurrentMap->isTilePosBlocked(this->posFlag()) || !isInBorder())
+	if (m_currentState == EPLS_MOVE &&  m_pCurrentMap->isTilePosBlocked(this->posFlag()) || !isInBorder()||morePosJadge())
 	{
+		CCPoint pos = m_pCurrentMap->tilePosFromLocation(m_pHero->getPosition());
+		if (m_pCurrentMap->bombBlock[(int)pos.x][(int)pos.y] && m_pCurrentMap->isTilePosBlocked(m_pHero->getPosition()))
+			return;
 		m_pHero->stopAction(m_pMoveBy);
 		backPos();
 	}
@@ -142,6 +146,35 @@ CCPoint CPlayer::posFlag()
   
 	
 
+}
+
+bool CPlayer::morePosJadge()
+{
+	CCPoint pos =  posFlag();
+	if (m_pCurrentMap == NULL)return false;
+
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y + ITV_UP/2)))
+	{
+		if (m_moveDirection == ECT_UP);
+		else return true;
+	}
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y - ITV_DOWN/2)))
+	{
+		if (m_moveDirection == ECT_DOWN);
+		else return true;
+	}
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x - ITV_LEFT/2, pos.y)))
+	{
+		if (m_moveDirection == ECT_LEFT);
+		else return true;
+	}
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x + ITV_RIGHT/2, pos.y)))
+	{
+		if (m_moveDirection == ECT_RIGHT);
+		else return true;
+	}
+
+	return false;
 }
 
 void CPlayer::handleDown(EControlType eCtrlType)
@@ -182,7 +215,9 @@ void CPlayer::handleUp(EControlType eCtrlType)
 	case ECT_RIGHT:
 		stop(eCtrlType);
 		break;
-
+	case ECT_PRESS:
+		setBomb();
+		break;
 	}
 }
 
@@ -197,6 +232,8 @@ bool CPlayer::changeState(EPlayerLogicState toState)
 
 void CPlayer::backPos()
 {
+	
+
 	float x = this->m_pHero->getPositionX();              //获得hero的x坐标位置  
 	float y = this->m_pHero->getPositionY();              //获得hero的y坐标位置  
 	float offset = 2;                             //遇到障碍物后防止卡死进行微小移动的偏移量  
@@ -217,7 +254,7 @@ bool CPlayer::isInBorder()
 	pos.x = m_pHero->getPositionX();
 	pos.y = m_pHero->getPositionY();
 
-	if (pos.x<CONTENT_WIDTH - ITV_RIGHT -5 && pos.y<CONTENT_HEIGHT-ITV_UP*2 && pos.x>ITV_LEFT && pos.y>ITV_DOWN*2)
+	if (pos.x<CONTENT_WIDTH - ITV_RIGHT -5 && pos.y<CONTENT_HEIGHT-ITV_UP*3 && pos.x>ITV_LEFT && pos.y>ITV_DOWN*2)
 		return true;
 	else
 	return false;
@@ -225,12 +262,12 @@ bool CPlayer::isInBorder()
 
 void CPlayer::setBornPosition()
 {
-	CCTMXTiledMap* map = this->m_pCurrentMap;
+	/*CCTMXTiledMap* map = this->m_pCurrentMap;
 	CCTMXObjectGroup* group = map->objectGroupNamed("object1");
 	CCDictionary* dictionary = group->objectNamed("born1");
 	float x = dictionary->valueForKey("x")->floatValue();
 	float y = dictionary->valueForKey("y")->floatValue();
-	m_pHero->setPosition(ccp(x, y));
+	m_pHero->setPosition(ccp(x, y));*/
 }
 
 CPlayer::~CPlayer()

@@ -12,9 +12,12 @@
 #include "BaseDef.h"
 #include <string>
 #include "map.h"
+#include "bomb.h"
 
+class CBomb;
 class CPlayer :public cocos2d::CCNode
 {
+	friend class CBomb;
 public:
 	//初始化角色
 	CPlayer();
@@ -36,6 +39,7 @@ public:
 	void myUpdate(float dt);
 	//碰撞检测函数
 	cocos2d::CCPoint posFlag();
+	bool morePosJadge();
 	//设置出生点
 	void setBornPosition();
 	//销毁retain精灵

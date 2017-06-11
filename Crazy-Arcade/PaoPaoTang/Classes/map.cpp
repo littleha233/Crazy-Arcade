@@ -6,12 +6,13 @@
 */
 /**********************/
 #include "map.h"
-
+#include "bomb.h"
 using namespace cocos2d;
-
+class CBomb;
 CMap* CMap::initTileMap(const char *tmxfile)
 {
 	CMap *map = new CMap;
+	memset(map->bombBlock, 0, sizeof(map->bombBlock));
 	if (map->initWithTMXFile(tmxfile))
 	{
 		CCTMXLayer *clayer = map->layerNamed("collision");       //通过层名字获得该层对象  
@@ -38,8 +39,9 @@ bool CMap::isTilePosBlocked(CCPoint pos)
 {
 	//判断当前块是否为碰撞块  
 	CCPoint tilpos = tilePosFromLocation(pos);                //将带入的坐标转为块坐标  
-	CCTMXLayer *clayer = this->layerNamed("collision");      //通过层名字获得该层对象  
-															 //clayer->setVisible(true);  
+	CCTMXLayer *clayer = this->layerNamed("collision");      //通过层名字获得该层对象 
+
+
 	int tileGID = clayer->tileGIDAt(tilpos);             //获得该块的GID标识别  
 	if (tileGID != 0)
 	{
@@ -47,5 +49,15 @@ bool CMap::isTilePosBlocked(CCPoint pos)
 		if (strcmp(properties->valueForKey("Collidable")->getCString(), "true") == 0)
 			return true;
 	}
+	if (bombBlock[(int)tilpos.x][(int)tilpos.y])
+		return true;
+
 	return false;
 }
+
+void CMap::setBombBlock(int x, int y,bool z)
+{
+	bombBlock[x][y] = z;
+}
+
+
