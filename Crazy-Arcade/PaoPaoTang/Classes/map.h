@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 
+
 class CMap :public cocos2d::CCTMXTiledMap
 {
 public:
@@ -20,6 +21,8 @@ public:
 	cocos2d::CCPoint tilePosFromLocation(cocos2d::CCPoint pos);
 	//ÅÐ¶ÏÍßÆ¬ÊÇ·ñÎªÕÏ°­
 	bool isTilePosBlocked(cocos2d::CCPoint pos);
+	bool bombBlock[20][15];
+	void setBombBlock(int x, int y,bool z);
 };
 
 
