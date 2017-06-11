@@ -40,3 +40,5 @@ Pic/SlowTurtle.png 96 128 2 4 2
 Pic/SlowTurtle.png 96 128 2 4 3
 Pic/TownWindmillAni.png 240 118 2 1 0
 Pic/custom_bubble_103.png 219 84 3 1 0
+Pic/Popo.png 132 41 3 1 0
+Pic/paopao.png 160 40 4 1 0

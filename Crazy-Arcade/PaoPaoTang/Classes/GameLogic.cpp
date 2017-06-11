@@ -97,10 +97,6 @@ void GameLogic::handleEvent( int eventType,void* data /*= NULL*/ )
 			mCurrentScene = NULL;
 			CCDirector::sharedDirector()->end();
 
-			delete mBeginScene;
-			mBeginScene = NULL;
-			delete mPlayScene;
-			mPlayScene = NULL;
 			return;
 		}
 	case ESSE_Back2Menu:

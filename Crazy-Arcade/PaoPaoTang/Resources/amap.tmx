@@ -16,11 +16,19 @@
   <tile id="0">
    <properties>
     <property name="Collidable" value="true"/>
+    <property name="destroyable" value="true"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
     <property name="Collidable" value="true"/>
+    <property name="destroyable" value="false"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="Collidable" value="false"/>
+    <property name="destroyable" value="false"/>
    </properties>
   </tile>
  </tileset>
@@ -37,6 +45,7 @@
    eJxjYBgFo4C6gHmgHTAKhi0AAAvEAAQ=
   </data>
  </layer>
+ <objectgroup name="paopao"/>
  <objectgroup name="object1">
   <object name="born1" x="44" y="43" width="32" height="30">
    <properties>
