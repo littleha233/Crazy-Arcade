@@ -3,6 +3,12 @@
 
 #define FRAME_WIDTH 800
 #define FRAME_HEIGHT 600
+#define ITV_UP 5.0 //碰撞检测时向上间隔
+#define ITV_DOWN 16 //碰撞检测时向下间隔
+#define ITV_LEFT 16.0 //碰撞检测时向左间隔
+#define ITV_RIGHT 16.0 //碰撞检测时向右间隔
+#define CONTENT_WIDTH 800 //游戏界面宽度
+#define CONTENT_HEIGHT 600 //游戏界面高度
 
 #define ROLE "Pic/Role1.png"
 
