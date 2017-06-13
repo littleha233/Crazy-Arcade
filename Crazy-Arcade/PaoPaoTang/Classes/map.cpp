@@ -9,20 +9,49 @@
 #include "bomb.h"
 using namespace cocos2d;
 class CBomb;
-CMap* CMap::initTileMap(const char *tmxfile)
+CMap* CMap::initTileMap(const char *tmxfile, CBaseScene* curScene)
 {
-	CMap *map = new CMap;
-	memset(map->bombBlock, 0, sizeof(map->bombBlock));
+	CMap *map = new CMap(curScene);
 	if (map->initWithTMXFile(tmxfile))
 	{
-		CCTMXLayer *clayer = map->layerNamed("collision");       //通过层名字获得该层对象  
-		//clayer->setVisible(false);
 		map->autorelease();
 		return map;
 	}
 
 	CC_SAFE_DELETE(map);
 	return NULL;
+}
+
+CMap::CMap(CBaseScene* curScene):
+	m_pBelongedScene(curScene),
+	m_pPlayer1(NULL),
+	m_pPlayer2(NULL)
+{
+	memset(bombBlock, 0, sizeof(bombBlock));
+	memset(bombAttack, 0, sizeof(bombAttack));
+	memset(itemPos, 0, sizeof(itemPos));
+	memset(itemPointerPos, 0, sizeof(itemPointerPos));
+	memset(bombPointerPos, 0, sizeof(bombPointerPos));
+
+	for (int i = 0; i < TILEDHEIGHT; i++) 
+	{
+		bombBlock[0][i] = 1;
+		bombBlock[TILEDWIDTH-1][i] = 1;
+	}
+	for (int i = 0; i < TILEDWIDTH; i++)
+	{
+		bombBlock[i][0] = 1;
+		bombBlock[i][TILEDHEIGHT-1] = 1;
+	}
+	
+	CCSprite* pBG = CCSprite::create("Pic/BG.png");
+	pBG->setAnchorPoint(CCPointZero);
+	addChild(pBG, 1); 
+	setPosition(ccp(-20, 0));
+	pBG->setPosition(ccp(20, 0));
+	m_pBelongedScene->getRootLayer()->addChild(this,1);
+	m_pPlayer1 = CPlayer::create(this);
+	m_pPlayer2 = CPlayer::create(this);
 }
 
 //通过指定的坐标转换为地图块坐标  
@@ -58,6 +87,17 @@ bool CMap::isTilePosBlocked(CCPoint pos)
 void CMap::setBombBlock(int x, int y,bool z)
 {
 	bombBlock[x][y] = z;
+}
+
+void CMap::setItem(CCPoint tPos)
+{
+	CItem* item = CItem::create(tPos,this);
+}
+
+void CMap::handleInput(EControlType eCtrlType, EPressState ePrsState)
+{
+	if (m_pPlayer1 != NULL)m_pPlayer1->handleInput(eCtrlType, ePrsState);
+	if (m_pPlayer2 != NULL)m_pPlayer2->handleInput(eCtrlType, ePrsState);
 }
 
 

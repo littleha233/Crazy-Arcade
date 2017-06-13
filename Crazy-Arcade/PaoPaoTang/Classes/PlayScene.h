@@ -6,6 +6,7 @@
 #include "map.h"
 using namespace cocos2d;
 
+
 class CPlayScene:public CBaseScene
 {
 public:
@@ -21,6 +22,7 @@ public:
 	void handleInput(EControlType eCtrlType, EPressState ePrsState);
 
 private:
-	CPlayer hero;
+	CMap* m_pMap;
+	
 };
 #endif

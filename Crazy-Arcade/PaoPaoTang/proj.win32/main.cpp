@@ -38,6 +38,17 @@ void MY_LPFN_ACCELEROMETER_KEYHOOK(UINT message, WPARAM wParam, LPARAM lParam)
 			eCtrlType = ECT_RIGHT; break;
 		case VK_SPACE:
 			eCtrlType = ECT_PRESS; break;
+		case VK_UP:
+			eCtrlType = ECT_UP2; break;
+		case VK_DOWN:
+			eCtrlType = ECT_DOWN2; break;
+		case VK_LEFT:
+			eCtrlType = ECT_LEFT2; break;
+		case VK_RIGHT:
+			eCtrlType = ECT_RIGHT2; break;
+		case VK_RETURN:
+			eCtrlType = ECT_PRESS2; break;
+			
 		}
 		break;
 	}
