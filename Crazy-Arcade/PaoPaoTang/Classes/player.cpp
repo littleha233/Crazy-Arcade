@@ -124,6 +124,8 @@ void CPlayer::trapped()
 
 void CPlayer::dead()
 {
+	SimpleAudioEngine::sharedEngine()->playEffect("Snd/die.wav");
+
 	CCAnimation* dieAni;
 	if (playerID == 1)dieAni = CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Role1Die.png0");
 	else if (playerID == 2)dieAni = CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Role2Die.png0");
@@ -134,6 +136,7 @@ void CPlayer::dead()
 
 void CPlayer::getItem()
 {
+	SimpleAudioEngine::sharedEngine()->playEffect("Snd/get.wav");
 	CCPoint tilpos = m_pCurrentMap->tilePosFromLocation(m_pHero->getPosition());
 	int itemID=m_pCurrentMap->itemPos[(int)tilpos.x][(int)tilpos.y];
 	if (itemID == 1 && m_iMaxBombNum <= 4)m_iMaxBombNum += 1;

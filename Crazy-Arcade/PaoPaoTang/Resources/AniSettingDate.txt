@@ -32,6 +32,7 @@ Pic/Role1Die.png 528 100 11 1 0
 Pic/Role1Ride.png 192 56 4 1 0
 Pic/Role1Start.png 480 64 11 1 0
 Pic/Role2Ani.png 448 70 8 1 0
+Pic/Role2Die.png 616 98 11 1 0
 Pic/Role2Ride.png 224 60 4 1 0
 Pic/Role2Start.png 560 71 4 1 0
 Pic/SlowTurtle.png 96 128 2 4 0

@@ -64,7 +64,8 @@ void CBomb::erase()
 void CBomb::explode(float dt)
 {
 	
-
+	
+	SimpleAudioEngine::sharedEngine()->playEffect("Snd/explode.wav");
 	CCPoint pos = m_sprite->getPosition();
 	up = CCSprite::create("Pic/paopaoup.png");
 	down = CCSprite::create("Pic/paopaodown.png");
