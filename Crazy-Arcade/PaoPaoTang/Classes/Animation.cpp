@@ -33,7 +33,7 @@ void load(SngPic& sp,char tempCh, string tempStr)
 	for (int i = 0; i < sp.divideWidth; i++)
 		animation->addSpriteFrameWithTexture(CCTextureCache::sharedTextureCache()->addImage(sp.filename),
 			CCRectMake(i * sp.picWidth / sp.divideWidth, sp.order * sp.picHeight / sp.divideHeight, sp.picWidth / sp.divideWidth, sp.picHeight / sp.divideHeight));
-	animation->setRestoreOriginalFrame(true);
+	animation->setRestoreOriginalFrame(false);
 	animation->setDelayPerUnit(1.0 / 6.0);
 	animation->setLoops(-1);
 	CCAnimationCache::sharedAnimationCache()->addAnimation(animation, (tempStr + tempCh).c_str());

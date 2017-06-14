@@ -22,6 +22,7 @@ CBomb::CBomb(cocos2d::CCPoint pos, CMap * layer,CPlayer* hero):
 
 		CCPoint tilpos = m_pCurMap->tilePosFromLocation(pos);
 		m_pCurMap->setBombBlock(tilpos.x, tilpos.y, true);
+		m_pCurMap->bombPointerPos[(int)tilpos.x][(int)tilpos.y] = this;
 
 		m_pCurMap->addChild(m_sprite, 2);
 		m_ani = CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Popo.png0"));
@@ -47,21 +48,34 @@ void CBomb::erase()
 	m_pCurMap->removeChild(left, 1);
 	m_pCurMap->removeChild(right, 1);
 
+	CCPoint tilpos = m_pCurMap->tilePosFromLocation(m_settedPos);
+	m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y] = 0;
+	for (int i = 1; i <= iUp; i++)m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y - i] = 0;
+	for (int i = 1; i <= iDown; i++)m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y + i] = 0;
+	for (int i = 1; i <= iLeft; i++)m_pCurMap->bombAttack[(int)tilpos.x - i][(int)tilpos.y] = 0;
+	for (int i = 1; i <= iRight; i++)m_pCurMap->bombAttack[(int)tilpos.x + i][(int)tilpos.y] = 0;
+
 	CCPoint pos = m_pCurMap->tilePosFromLocation(m_settedPos);
 	m_pCurMap->setBombBlock(pos.x, pos.y, false);
+
+	m_pHero->m_iSettledBobNum -= 1;
 }
 
 void CBomb::explode(float dt)
 {
-	int blockedScale = expoldeBlock();
-
+	
+	
+	SimpleAudioEngine::sharedEngine()->playEffect("Snd/explode.wav");
 	CCPoint pos = m_sprite->getPosition();
 	up = CCSprite::create("Pic/paopaoup.png");
 	down = CCSprite::create("Pic/paopaodown.png");
 	left = CCSprite::create("Pic/paopaoleft.png");
 	right = CCSprite::create("Pic/paopaoright.png");
 
-	
+	CCPoint tpos = m_pCurMap->tilePosFromLocation(pos);
+	m_pCurMap->bombPointerPos[(int)tpos.x][(int)tpos.y] = NULL;
+
+	int blockedScale = expoldeBlock();
 
 	up->setAnchorPoint(ccp(0.5, 0));
 	down->setAnchorPoint(ccp(0.5, 1.0));
@@ -72,11 +86,24 @@ void CBomb::explode(float dt)
 	left->setScaleX(0.1);
 	right->setScaleX(0.1);
 
-	CCScaleBy *_up = CCScaleBy::create(0.2, 1.0, blockedScale/1000*10);
-	CCScaleBy *_down = CCScaleBy::create(0.2, 1.0, (blockedScale%1000)/100*10);
-	CCScaleBy *_left = CCScaleBy::create(0.2, (blockedScale % 100) / 10*10, 1.0);
-	CCScaleBy *_right = CCScaleBy::create(0.2, (blockedScale % 10) / 1*10, 1.0);
+	iUp = blockedScale / 1000 ;
+	iDown = (blockedScale % 1000) / 100 ;
+	iLeft = (blockedScale % 100) / 10 ;
+	iRight = (blockedScale % 10) / 1 ;
 	
+
+	CCScaleBy *_up = CCScaleBy::create(0.2, 1.0, iUp*10);
+	CCScaleBy *_down = CCScaleBy::create(0.2, 1.0, iDown*10);
+	CCScaleBy *_left = CCScaleBy::create(0.2, iLeft*10, 1.0);
+	CCScaleBy *_right = CCScaleBy::create(0.2, iRight*10, 1.0);
+
+	CCPoint tilpos = m_pCurMap->tilePosFromLocation(m_settedPos);
+	m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y ] = 1;
+	for (int i = 1; i <= iUp;i++)m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y - i] = 1;
+	for (int i = 1; i <= iDown; i++)m_pCurMap->bombAttack[(int)tilpos.x][(int)tilpos.y + i] = 1;
+	for (int i = 1; i <= iLeft; i++)m_pCurMap->bombAttack[(int)tilpos.x-i][(int)tilpos.y ] = 1;
+	for (int i = 1; i <= iRight; i++)m_pCurMap->bombAttack[(int)tilpos.x+i][(int)tilpos.y ] = 1;
+
 	CCCallFunc* callFun = CCCallFunc::create(this, callfunc_selector(CBomb::erase));
 	CCAction *callFun_right = CCSequence::create(_right, callFun, NULL);
 	
@@ -109,6 +136,8 @@ int CBomb::expoldeBlock()
 	CCPoint tp3 = pos;
 	CCPoint tp4 = pos;
 
+
+
 	for (int i = 0; i < m_pHero->m_iBombScale; i++)
 	{
 		
@@ -120,6 +149,15 @@ int CBomb::expoldeBlock()
 		}
 		else if(m_pCurMap->isTilePosBlocked(tp1) == true)
 		{
+			CCPoint ttp = m_pCurMap->tilePosFromLocation(tp1);
+			CBomb* bomb = m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y];
+			if (bomb!=NULL&&ttp.x!=0&&ttp.x!=TILEDWIDTH-1&&ttp.y!=0&&ttp.y!=TILEDHEIGHT-1&& m_pCurMap->bombBlock[(int)ttp.x][(int)ttp.y] == 1)
+			{
+				bomb->explode(1);
+				bomb->unschedule(schedule_selector(CBomb::explode));
+				
+				m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y] = NULL;
+			}
 			deleteTile(tp1);
 			blockedScale += 1000 * i;
 			break;
@@ -143,6 +181,15 @@ int CBomb::expoldeBlock()
 		}
 		else if (m_pCurMap->isTilePosBlocked(tp2) == true)
 		{
+			CCPoint ttp = m_pCurMap->tilePosFromLocation(tp2);
+			CBomb* bomb = m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y];
+			if (bomb != NULL&&ttp.x != 0 && ttp.x != TILEDWIDTH - 1 && ttp.y != 0 && ttp.y != TILEDHEIGHT - 1 && m_pCurMap->bombBlock[(int)ttp.x][(int)ttp.y] == 1)
+			{
+				bomb->explode(1);
+				bomb->unschedule(schedule_selector(CBomb::explode));
+				m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y] = NULL;
+			}
+
 			deleteTile(tp2);
 			blockedScale += 100 * i;
 			break;
@@ -164,6 +211,15 @@ int CBomb::expoldeBlock()
 		}
 		else if (m_pCurMap->isTilePosBlocked(tp3) == true)
 		{
+			CCPoint ttp = m_pCurMap->tilePosFromLocation(tp3);
+			CBomb* bomb = m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y];
+			if (bomb != NULL&&ttp.x != 0 && ttp.x != TILEDWIDTH - 1 && ttp.y != 0 && ttp.y != TILEDHEIGHT - 1 && m_pCurMap->bombBlock[(int)ttp.x][(int)ttp.y] == 1)
+			{
+				bomb->explode(1);
+				bomb->unschedule(schedule_selector(CBomb::explode));
+				m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y] = NULL;
+			}
+
 			deleteTile(tp3);
 			blockedScale += 10 * i;
 			break;
@@ -185,6 +241,15 @@ int CBomb::expoldeBlock()
 		}
 		else if (m_pCurMap->isTilePosBlocked(tp4) == true)
 		{
+			CCPoint ttp = m_pCurMap->tilePosFromLocation(tp4);
+			CBomb* bomb = m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y];
+			if (bomb != NULL&&ttp.x != 0 && ttp.x != TILEDWIDTH - 1 && ttp.y != 0 && ttp.y != TILEDHEIGHT - 1 && m_pCurMap->bombBlock[(int)ttp.x][(int)ttp.y] == 1)
+			{
+				bomb->explode(1);
+				bomb->unschedule(schedule_selector(CBomb::explode));
+				m_pCurMap->bombPointerPos[(int)ttp.x][(int)ttp.y] = NULL;
+			}
+
 			deleteTile(tp4);
 			blockedScale += 1 * i;
 			break;
@@ -226,10 +291,12 @@ void CBomb::deleteTile(cocos2d::CCPoint pos)
 		if (strcmp(properties->valueForKey("destroyable")->getCString(), "true") == 0)
 		{
 			clayer->removeTileAt(tilpos);
+			m_pCurMap->setItem(toTiledPos(pos));
 		}
 	}
 	
-	return;
+	
+	
 }
 
 CCPoint CBomb::toTiledPos(CCPoint &pos)

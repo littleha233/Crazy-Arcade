@@ -38,6 +38,10 @@ private:
 	cocos2d::CCSprite* centre;
 	CPlayer* m_pHero;//泡泡所属角色
 	cocos2d::CCPoint m_settedPos;//放置泡泡时角色的坐标
+	int iUp;
+	int iDown;
+	int iLeft;
+	int iRight;
 	
 };
 

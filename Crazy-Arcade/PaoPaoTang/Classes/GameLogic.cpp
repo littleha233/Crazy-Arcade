@@ -4,6 +4,7 @@
 #include "SimpleAudioEngine.h"
 #include "BeginScene.h"
 #include "PlayScene.h"
+#include "music.h"
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -37,6 +38,7 @@ bool GameLogic::applicationDidFinishLaunching()
 
 	/*****加载动画****/
 	loadAni();
+	preLoadMusic();
 	/*****加载动画****/
 	//
 

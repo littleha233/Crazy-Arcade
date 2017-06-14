@@ -3,14 +3,15 @@
 
 #define FRAME_WIDTH 800
 #define FRAME_HEIGHT 600
-#define ITV_UP 5.0 //碰撞检测时向上间隔
-#define ITV_DOWN 16 //碰撞检测时向下间隔
-#define ITV_LEFT 16.0 //碰撞检测时向左间隔
-#define ITV_RIGHT 16.0 //碰撞检测时向右间隔
-#define CONTENT_WIDTH 800 //游戏界面宽度
+#define ITV_UP 12.0 //碰撞检测时向上间隔
+#define ITV_DOWN 12.0 //碰撞检测时向下间隔
+#define ITV_LEFT 12.0 //碰撞检测时向左间隔
+#define ITV_RIGHT 12.0 //碰撞检测时向右间隔
+#define CONTENT_WIDTH 680 //游戏界面宽度
 #define CONTENT_HEIGHT 600 //游戏界面高度
 
-#define ROLE "Pic/Role1.png"
+#define ROLE1 "Pic/Role1.png"
+#define ROLE2 "Pic/Role2.png"
 
 enum EControlType
 {
@@ -19,7 +20,13 @@ enum EControlType
 	ECT_LEFT,
 	ECT_RIGHT,
 	ECT_PRESS,
-	ECT_NUM
+	ECT_NUM,
+	ECT_UP2,
+	ECT_DOWN2,
+	ECT_LEFT2,
+	ECT_RIGHT2,
+	ECT_PRESS2,
+	ECT_NUM2
 };
 
 enum EMoveDirection
