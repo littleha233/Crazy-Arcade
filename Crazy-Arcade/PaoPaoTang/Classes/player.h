@@ -14,6 +14,7 @@
 #include "map.h"
 #include "bomb.h"
 #include "BaseScene.h"
+#include "music.h"
 class CBaseScene;
 class CBomb;
 class CPlayer :public cocos2d::CCNode

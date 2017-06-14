@@ -1,7 +1,7 @@
 #include "PlayScene.h"
 #include "MenuSelectHandler.h"
 #include "Animation.h"
-
+#include "music.h"
 
 
 
@@ -28,6 +28,8 @@ void CPlayScene::onEnterScene()
 	//sp->runAction(animate);
 	m_pMap = CMap::initTileMap("amap1.tmx",this);
 
+	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Village.mp3", true);
 
 	/*amap->addChild(hero.getSprite(),3);*/
 	/**************¶¯»­Ð¡²âÊÔ*****************/
@@ -49,6 +51,8 @@ void CPlayScene::onExitScene()
 	m_pMap->m_pPlayer2->unschedule(schedule_selector(CPlayer::myUpdate, m_pMap->m_pPlayer2));
 	m_pMap->m_pPlayer1->s_playerNum = 0;
 	mRootLayer->removeAllChildrenWithCleanup(true);
+
+	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
 }
 
 void CPlayScene::handleInput(EControlType eCtrlType, EPressState ePrsState)

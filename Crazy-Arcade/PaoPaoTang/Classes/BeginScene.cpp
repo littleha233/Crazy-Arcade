@@ -3,8 +3,12 @@
 #include "BaseDef.h"
 #include "MenuSelectHandler.h"
 #include "Animation.h"
+#include "music.h"
+
 void CBeginScene::onEnterScene()
 {
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Prepare.mp3",true);
+
 	CCSprite* backGround = CCSprite::create("Pic/begin1.jpg");
 	backGround->setScale(1.4);
 	backGround->setPosition(ccp(FRAME_WIDTH/2,FRAME_HEIGHT/2));
