@@ -49,7 +49,8 @@ enum ESceneSwitchEvent
 {
 	ESSE_Play,
 	ESSE_Exit,
-	ESSE_Back2Menu
+	ESSE_Back2Menu,
+	ESSE_Map
 };
 
 

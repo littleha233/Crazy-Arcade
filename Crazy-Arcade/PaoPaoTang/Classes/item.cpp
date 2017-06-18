@@ -13,7 +13,7 @@ CItem::CItem(CMap * map,CCPoint tPos):
 
 	m_pSprite = CCSprite::create();
 	srand(((int)&m_pSprite)+time(NULL));
-	m_iItemID = rand() % 10;
+	m_iItemID = rand() % 8;
 
 
 	if(m_iItemID==1)m_pAnimate=CCAnimate::create(CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Gift1.png0"));

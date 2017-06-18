@@ -4,10 +4,12 @@
 #include "SimpleAudioEngine.h"
 #include "BeginScene.h"
 #include "PlayScene.h"
+#include "MapScene.h"
 #include "music.h"
 using namespace CocosDenshion;
 
 USING_NS_CC;
+int MAPTAG;
 GameLogic::GameLogic()
 	:mSceneRoot(NULL)
 	,mBeginScene(NULL)
@@ -48,11 +50,12 @@ bool GameLogic::applicationDidFinishLaunching()
 	mSceneRoot = CCScene::create();
 	mBeginScene = new CBeginScene();
 	mPlayScene = new CPlayScene();
+	mMapScene = new CMapScene();
 
 
 	mSceneRoot->addChild(mBeginScene->getRootLayer());
 	mCurrentScene = mBeginScene;
-	mCurrentScene->onEnterScene();
+	mCurrentScene->onEnterScene(0);
     // run
     pDirector->runWithScene(mSceneRoot);
     return true;
@@ -84,13 +87,23 @@ void GameLogic::handleEvent( int eventType,void* data /*= NULL*/ )
 {
 	switch(eventType)
 	{
+	case ESSE_Map:
+	{
+		mCurrentScene->onExitScene();
+		mSceneRoot->removeChild(mCurrentScene->getRootLayer(), false);
+		mCurrentScene = mPlayScene;
+		mSceneRoot->addChild(mCurrentScene->getRootLayer());
+		if (MAPTAG == 1) mCurrentScene->onEnterScene(1);
+		if (MAPTAG == 2) mCurrentScene->onEnterScene(2);
+		return;
+	}
 	case ESSE_Play:
 		{
 			mCurrentScene->onExitScene();
 			mSceneRoot->removeChild(mCurrentScene->getRootLayer(),false);
-			mCurrentScene = mPlayScene;
+			mCurrentScene = mMapScene;
 			mSceneRoot->addChild(mCurrentScene->getRootLayer());
-			mCurrentScene->onEnterScene();
+			mCurrentScene->onEnterScene(0);
 			return;
 		}
 	case ESSE_Exit:
@@ -107,7 +120,7 @@ void GameLogic::handleEvent( int eventType,void* data /*= NULL*/ )
 			mSceneRoot->removeChild(mCurrentScene->getRootLayer(),false);
 			mCurrentScene = mBeginScene;
 			mSceneRoot->addChild(mCurrentScene->getRootLayer());
-			mCurrentScene->onEnterScene();
+			mCurrentScene->onEnterScene(0);
 			return;
 		}
 	}
