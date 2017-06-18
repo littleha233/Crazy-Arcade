@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="17" height="15" tilewidth="40" tileheight="40">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="15" tilewidth="40" tileheight="40">
  <tileset firstgid="1" name="bcg" tilewidth="40" tileheight="40">
   <image source="Pic/SandGround.png" width="80" height="40"/>
  </tileset>
  <tileset firstgid="3" name="collision2" tilewidth="40" tileheight="27">
   <image source="Pic/someobjects4.png" width="80" height="27"/>
+  <tile id="1">
+   <properties>
+    <property name="destroyable" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="5" name="collision1" tilewidth="40" tileheight="40">
   <image source="Pic/someobjects3.png" width="80" height="40"/>
@@ -40,7 +45,7 @@
    eJxjYKAOYKIAj5oxasaoGaSbQSkAABApAYc=
   </data>
  </layer>
- <objectgroup name="object1" width="0" height="0">
+ <objectgroup name="object1">
   <object name="born1" x="85" y="85" width="28" height="27">
    <properties>
     <property name="x" value="100"/>
@@ -83,7 +88,7 @@
  </layer>
  <layer name="collision2" width="17" height="15">
   <data encoding="base64" compression="zlib">
-   eJy9ksEKACAIQwf5/9/cpWjJMpFoEB3U+TKBpYacojwb8duxg69RTOXAxWc/xcf1ht2b4+o9zJjhOHmoGs8R5fNMPI+fww8O7qs85x1xVP/l1X4wY2VPmSejbN5vdcb6ATk=
+   eJxjYEAAZgbiACF1zERgcswl1j2kmoNN/agZg88MaqUPZHFy0imp7iHX3bQGABPrAHk=
   </data>
  </layer>
 </map>
