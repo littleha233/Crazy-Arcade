@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="17" height="15" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="bcg" tilewidth="40" tileheight="40">
+  <image source="Pic/SandGround.png" width="80" height="40"/>
+ </tileset>
+ <tileset firstgid="3" name="collision2" tilewidth="40" tileheight="27">
+  <image source="Pic/someobjects4.png" width="80" height="27"/>
+  <tile id="1">
+   <properties>
+    <property name="destroyable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="5" name="collision1" tilewidth="40" tileheight="40">
+  <image source="Pic/someobjects3.png" width="80" height="40"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+    <property name="destroyable" value="false"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Collidable" value="true"/>
+    <property name="destroyable" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="7" name="stone" tilewidth="40" tileheight="47">
+  <image source="Pic/SandStone.png" width="40" height="47"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="true"/>
+    <property name="destroyable" value="false"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="edge" width="17" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYKICpgSMmjFqxqgZpJtBKQYA8/wAeQ==
+  </data>
+ </layer>
+ <layer name="bcg" width="17" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAOYKIAj5oxasaoGaSbQSkAABApAYc=
+  </data>
+ </layer>
+ <objectgroup name="object1">
+  <object name="born1" x="85" y="85" width="28" height="27">
+   <properties>
+    <property name="x" value="100"/>
+   </properties>
+  </object>
+  <object name="born3" x="566" y="86" width="27" height="27">
+   <properties>
+    <property name="x" value="580"/>
+    <property name="y" value="100"/>
+   </properties>
+  </object>
+  <object name="born2" x="563" y="484" width="29" height="28">
+   <properties>
+    <property name="x" value="580"/>
+    <property name="y" value="580"/>
+   </properties>
+  </object>
+  <object name="born4" x="85" y="484" width="30" height="27">
+   <properties>
+    <property name="x" value="100"/>
+    <property name="y" value="580"/>
+   </properties>
+  </object>
+  <object name="born1" x="85" y="85" width="28" height="27">
+   <properties>
+    <property name="x" value="100"/>
+    <property name="y" value="100"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="collision" width="17" height="15">
+  <data encoding="base64" compression="zlib">
+   eJy9ksEKACAIQ73k/39yl4Il00wkITps6ssU6Y3R4NOl3446dRU05hGj736MD/NVztqos/cgY4bDq8FyLEfkx5lYHjuHHxzYl9Xcd8RR/Zeu/UDGyp4iTyayvpeY1CkB6Q==
+  </data>
+ </layer>
+ <layer name="stone" width="17" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIxWwD7QDRsGAAgAR/AAI
+  </data>
+ </layer>
+ <layer name="collision2" width="17" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYEAAZgbiACF1zERgcswl1j2kmoNN/agZg88MaqUPZHFy0imp7iHX3bQGABPrAHk=
+  </data>
+ </layer>
+</map>

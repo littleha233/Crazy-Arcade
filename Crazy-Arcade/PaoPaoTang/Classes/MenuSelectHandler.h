@@ -4,6 +4,8 @@
 #include "GameLogic.h"
 #include "BaseDef.h"
 using namespace cocos2d;
+
+extern int MAPTAG;
 class CMenuSelectHandler:public CCObject
 {
 private:
@@ -28,6 +30,16 @@ public:
 	void onMenu_Back2Menu(CCObject* pSender)
 	{
 		GameLogic::sharedGameLogic().handleEvent(ESSE_Back2Menu);
+	}
+	void onMenu_Map1(CCObject* pSender)
+	{
+		MAPTAG = 1;
+		GameLogic::sharedGameLogic().handleEvent(ESSE_Map);
+	}
+	void onMenu_Map2(CCObject* pSender)
+	{
+		MAPTAG = 2;
+		GameLogic::sharedGameLogic().handleEvent(ESSE_Map);
 	}
 };
 #endif

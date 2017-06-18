@@ -5,9 +5,9 @@
 #include "Animation.h"
 #include "music.h"
 
-void CBeginScene::onEnterScene()
+void CBeginScene::onEnterScene(int i)
 {
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Prepare.mp3",true);
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Begin.mp3",true);
 
 	CCSprite* backGround = CCSprite::create("Pic/begin1.jpg");
 	backGround->setScale(1.4);

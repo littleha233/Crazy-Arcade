@@ -12,7 +12,7 @@ m_pMap(NULL)
 {
 }
 
-void CPlayScene::onEnterScene()
+void CPlayScene::onEnterScene(int i)
 {
 	mRootLayer->setAnchorPoint(CCPointZero);
 	/*CCSprite* pBG = CCSprite::create("Pic/BG.png");
@@ -26,10 +26,11 @@ void CPlayScene::onEnterScene()
 	//sp->setPosition(ccp(FRAME_WIDTH/2,FRAME_HEIGHT*0.7));
 	//mRootLayer->addChild(sp);
 	//sp->runAction(animate);
-	m_pMap = CMap::initTileMap("amap1.tmx",this);
+	if (MAPTAG == 1)m_pMap = CMap::initTileMap("amap1.tmx",this);
+	if (MAPTAG == 2)m_pMap = CMap::initTileMap("amap2.tmx", this);
 
 	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Village.mp3", true);
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Play.mp3", true);
 
 	/*amap->addChild(hero.getSprite(),3);*/
 	/**************∂Øª≠–°≤‚ ‘*****************/
