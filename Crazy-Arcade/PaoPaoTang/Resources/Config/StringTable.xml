@@ -6,4 +6,5 @@
         <item key="bgm_resume" text="音乐播放中"/>
         <item key="bgm_pause" text="音乐暂停中"/>
         <item key="title" text="泡泡堂"/>
+        <item key="map" text="请选择地图"/>
 </config>

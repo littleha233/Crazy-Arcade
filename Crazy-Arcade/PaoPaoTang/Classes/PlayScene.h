@@ -11,7 +11,7 @@ class CPlayScene:public CBaseScene
 {
 public:
 	CPlayScene();
-	virtual void onEnterScene();
+	virtual void onEnterScene(int i);
 	virtual void onExitScene();
 	virtual void onUpdate(float dt)
 	{
