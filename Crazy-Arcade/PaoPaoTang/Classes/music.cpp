@@ -11,5 +11,6 @@ void preLoadMusic()
 	SimpleAudioEngine::sharedEngine()->preloadEffect("Snd/die.wav");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("Snd/explode.wav");
 	SimpleAudioEngine::sharedEngine()->preloadEffect("Snd/get.wav");
+	SimpleAudioEngine::sharedEngine()->preloadEffect("Snd/win.wav");
 
 }
