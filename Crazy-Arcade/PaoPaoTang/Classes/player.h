@@ -36,6 +36,9 @@ public:
 	void trapped();
 	//角色死亡
 	void dead();
+	bool isDead();
+	void win(int ID);
+
 	//获得道具
 	void getItem();
 	//键盘控制
@@ -48,6 +51,7 @@ public:
 	//设置出生点
 	void setBornPosition();
 	//销毁retain精灵
+	EControlType getMoveDirection();
 	~CPlayer();
 
 	static int s_playerNum;

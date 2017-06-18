@@ -2,9 +2,9 @@
 	<item key="play" text="开始游戏"/>
 	<item key="exit" text="退出游戏"/>
 	<item key="main_menu" text="主菜单"/>
+	<item key="bac_menu" text="返回主菜单"/>
 	<item key="game_over" text="游戏结束"/>
         <item key="bgm_resume" text="音乐播放中"/>
         <item key="bgm_pause" text="音乐暂停中"/>
         <item key="title" text="泡泡堂"/>
-        <item key="map" text="请选择地图"/>
 </config>

@@ -119,6 +119,7 @@ void CPlayer::trapped()
 {
 	m_pHero->stopAllActions();
 	changeState(EPLS_PAOPAO);
+	/*if(m_currentState!=EPLS_DEAD)*/
 	dead();
 }
 
@@ -132,7 +133,15 @@ void CPlayer::dead()
 	dieAni->setLoops(1);
 	changeState(EPLS_DEAD);
 	m_pHero->runAction(CCAnimate::create(dieAni));
+	m_pCurrentMap->scheduleOnce(schedule_selector(CMap::judge), 2.0);
 }
+
+bool CPlayer::isDead()
+{
+	if (m_currentState == EPLS_DEAD)return true;
+	return false;
+}
+
 
 void CPlayer::getItem()
 {
@@ -140,7 +149,7 @@ void CPlayer::getItem()
 	CCPoint tilpos = m_pCurrentMap->tilePosFromLocation(m_pHero->getPosition());
 	int itemID=m_pCurrentMap->itemPos[(int)tilpos.x][(int)tilpos.y];
 	if (itemID == 1 && m_iMaxBombNum <= 4)m_iMaxBombNum += 1;
-	else if (itemID == 2 && m_iSpeed >= 2.5)m_iSpeed -= 0.3;
+	else if (itemID == 2 && m_iSpeed >= 2.8)m_iSpeed -= 0.2;
 	else if (itemID == 3 && m_iBombScale <= 7)m_iBombScale += 2;
 
 	m_pCurrentMap->itemPos[(int)tilpos.x][(int)tilpos.y]=0;
@@ -165,10 +174,13 @@ void CPlayer::handleInput(EControlType eCtrlType, EPressState ePrsState)
 void CPlayer::myUpdate(float dt)
 {
 	CCPoint pos = m_pCurrentMap->tilePosFromLocation(m_pHero->getPosition());
-	if (m_currentState == EPLS_MOVE &&  m_pCurrentMap->isTilePosBlocked(this->posFlag()) || !isInBorder() || morePosJadge())
+	int m = 3, n = 3;
+	m = m_pCurrentMap->isTilePosBlocked(posFlag(), this);
+	n = morePosJadge();
+	if (m_currentState == EPLS_MOVE && m || !isInBorder() || n)
 	{
-		if (m_pCurrentMap->bombBlock[(int)pos.x][(int)pos.y] && m_pCurrentMap->isTilePosBlocked(m_pHero->getPosition()))
-			return;
+		/*if (m_pCurrentMap->bombBlock[(int)pos.x][(int)pos.y] && m_pCurrentMap->isTilePosBlocked(m_pHero->getPosition()))
+		return;*/
 		m_pHero->stopAction(m_pMoveBy);
 		backPos();
 	}
@@ -176,7 +188,7 @@ void CPlayer::myUpdate(float dt)
 	{
 		trapped();
 	}
-		
+
 	if (m_pCurrentMap->itemPos[(int)pos.x][(int)pos.y])
 	{
 		getItem();
@@ -209,27 +221,27 @@ CCPoint CPlayer::posFlag()
 bool CPlayer::morePosJadge()
 {
 	if (m_currentState != EPLS_MOVE)return false;
-	CCPoint pos =  posFlag();
+	CCPoint pos = posFlag();
 	if (m_pCurrentMap == NULL)return false;
 
-	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y + ITV_UP)))
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y + ITV_UP), this))
 	{
-		if (m_moveDirection == ECT_UP|| m_moveDirection == ECT_DOWN);
+		if (m_moveDirection == ECT_UP || m_moveDirection == ECT_DOWN);
 		else return true;
 	}
-	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y - ITV_DOWN)))
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x, pos.y - ITV_DOWN), this))
 	{
-		if (m_moveDirection == ECT_DOWN|| m_moveDirection == ECT_UP);
+		if (m_moveDirection == ECT_DOWN || m_moveDirection == ECT_UP);
 		else return true;
 	}
-	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x - ITV_LEFT, pos.y)))
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x - ITV_LEFT, pos.y), this))
 	{
-		if (m_moveDirection == ECT_LEFT|| m_moveDirection == ECT_RIGHT);
+		if (m_moveDirection == ECT_LEFT || m_moveDirection == ECT_RIGHT);
 		else return true;
 	}
-	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x + ITV_RIGHT, pos.y)))
+	if (m_pCurrentMap->isTilePosBlocked(ccp(pos.x + ITV_RIGHT, pos.y), this))
 	{
-		if (m_moveDirection == ECT_RIGHT|| m_moveDirection == ECT_LEFT);
+		if (m_moveDirection == ECT_RIGHT || m_moveDirection == ECT_LEFT);
 		else return true;
 	}
 
@@ -333,6 +345,11 @@ void CPlayer::setBornPosition()
 	float x = dictionary->valueForKey("x")->floatValue();
 	float y = dictionary->valueForKey("y")->floatValue();
 	m_pHero->setPosition(ccp(x, y));
+}
+
+EControlType CPlayer::getMoveDirection()
+{
+	return m_moveDirection;
 }
 
 CPlayer::~CPlayer()

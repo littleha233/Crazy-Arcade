@@ -15,6 +15,7 @@
 #include "BeginScene.h"
 #include "player.h"
 #include "bomb.h"
+#include "MenuSelectHandler.h"
 
 class CBomb;
 class CPlayer;
@@ -27,6 +28,7 @@ public:
 	cocos2d::CCPoint tilePosFromLocation(cocos2d::CCPoint pos);
 	//ÅÐ¶ÏÍßÆ¬ÊÇ·ñÎªÕÏ°­
 	bool isTilePosBlocked(cocos2d::CCPoint pos);
+	bool isTilePosBlocked(cocos2d::CCPoint pos, CPlayer*);
 	bool bombBlock[TILEDWIDTH][TILEDHEIGHT];
 	bool bombAttack[TILEDWIDTH][TILEDHEIGHT];
 	int itemPos[TILEDWIDTH][TILEDHEIGHT];
@@ -35,9 +37,13 @@ public:
 	void setBombBlock(int x, int y,bool z);
 	void setItem(cocos2d::CCPoint);
 	void handleInput(EControlType eCtrlType, EPressState ePrsState);
+	void judge(float dt);
+	void win(int ID);
+	cocos2d::CCPoint toTiledPos(cocos2d::CCPoint&);
 	CPlayer* m_pPlayer1;
 	CPlayer* m_pPlayer2;
 	CBaseScene* m_pBelongedScene;
+	int judgeTime ;
 
 };
 
