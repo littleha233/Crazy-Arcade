@@ -9,8 +9,8 @@ void CBeginScene::onEnterScene(int i)
 {
 	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Begin.mp3",true);
 
-	CCSprite* backGround = CCSprite::create("Pic/begin1.jpg");
-	backGround->setScale(1.4);
+	CCSprite* backGround = CCSprite::create("Pic/timg.jpg");
+	backGround->setScale(0.78);
 	backGround->setPosition(ccp(FRAME_WIDTH/2,FRAME_HEIGHT/2));
 	mRootLayer->addChild(backGround);
 

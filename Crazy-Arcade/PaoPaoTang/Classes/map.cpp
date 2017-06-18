@@ -25,7 +25,8 @@ CMap* CMap::initTileMap(const char *tmxfile, CBaseScene* curScene)
 CMap::CMap(CBaseScene* curScene):
 	m_pBelongedScene(curScene),
 	m_pPlayer1(NULL),
-	m_pPlayer2(NULL)
+	m_pPlayer2(NULL),
+	judgeTime(0)
 {
 	memset(bombBlock, 0, sizeof(bombBlock));
 	memset(bombAttack, 0, sizeof(bombAttack));
@@ -83,6 +84,36 @@ bool CMap::isTilePosBlocked(CCPoint pos)
 
 	return false;
 }
+bool CMap::isTilePosBlocked(cocos2d::CCPoint pos, CPlayer* hero)
+{
+	//判断当前块是否为碰撞块  
+	CCPoint spritePos = hero->getSprite()->getPosition();
+
+	CCPoint tilSptitePos = tilePosFromLocation(spritePos);
+	CCPoint tilpos = tilePosFromLocation(pos);                //将带入的坐标转为块坐标  
+	CCTMXLayer *clayer = this->layerNamed("collision");      //通过层名字获得该层对象 
+
+
+	int tileGID = clayer->tileGIDAt(tilpos);             //获得该块的GID标识别  
+	if (tileGID != 0)
+	{
+		CCDictionary* properties = this->propertiesForGID(tileGID);
+		if (strcmp(properties->valueForKey("Collidable")->getCString(), "true") == 0)
+			return true;
+	}
+	CCPoint centre = toTiledPos(pos);
+	float dx = fabs(centre.x - spritePos.x);
+	float dy = fabs(centre.y - spritePos.y);
+
+	bool m = (hero->getMoveDirection() == ECT_LEFT || hero->getMoveDirection() == ECT_RIGHT) && (dx < 20) && (dy < 20 + ITV_LEFT);
+	bool n = (hero->getMoveDirection() == ECT_UP || hero->getMoveDirection() == ECT_DOWN) && (dx < 20 + ITV_UP) && (dy < 20);
+
+	if (bombBlock[(int)tilpos.x][(int)tilpos.y] && !bombBlock[(int)tilSptitePos.x][(int)tilSptitePos.y] && !m && !n)
+		return true;
+
+	return false;
+}
+
 
 void CMap::setBombBlock(int x, int y,bool z)
 {
@@ -100,4 +131,66 @@ void CMap::handleInput(EControlType eCtrlType, EPressState ePrsState)
 	if (m_pPlayer2 != NULL)m_pPlayer2->handleInput(eCtrlType, ePrsState);
 }
 
+void CMap::judge(float dt)
+{
+	if (judgeTime == 0)
+	{
+		if (!m_pPlayer1->isDead()&& m_pPlayer2->isDead())win(1);
+		if (m_pPlayer1->isDead() && !m_pPlayer2->isDead())win(2);
+		if (m_pPlayer1->isDead() && m_pPlayer2->isDead())win(-1);
+		judgeTime += 1;
+	}
+}
 
+void CMap::win(int ID)
+{
+	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	SimpleAudioEngine::sharedEngine()->playEffect("Snd/win.wav");
+	if (ID == 1)
+	{
+		CCSprite* title = CCSprite::create("Pic/Player.png",CCRectMake(0,0,110,25));
+		CCSprite* win = CCSprite::create("Pic/Win.png");
+		title->setPosition(ccp(CONTENT_WIDTH / 2 - 100, CONTENT_HEIGHT / 2 + 100));
+		win->setPosition(ccp(CONTENT_WIDTH / 2 - 100 + 55 + 102, CONTENT_HEIGHT / 2 + 100));
+		addChild(title, 5);
+		addChild(win, 5);
+		
+	}
+	else if (ID == 2)
+	{
+		CCSprite* title = CCSprite::create("Pic/Player.png", CCRectMake(0, 25, 110, 25));
+		CCSprite* win = CCSprite::create("Pic/Win.png");
+		title->setPosition(ccp(CONTENT_WIDTH / 2 - 100, CONTENT_HEIGHT / 2 + 100));
+		win->setPosition(ccp(CONTENT_WIDTH / 2 - 100 + 55 + 102, CONTENT_HEIGHT / 2 + 100));
+		addChild(title, 5);
+		addChild(win, 5);
+	}
+	else if (ID == -1)
+	{
+		CCSprite* draw = CCSprite::create("Pic/Draw.png");
+		draw->setPosition(ccp(CONTENT_WIDTH / 2 - 100 + 55 + 102, CONTENT_HEIGHT / 2 + 100));
+		addChild(draw, 5);
+	}
+
+	CCLabelTTF* back_label = CCLabelTTF::create(CStringTableMgr::getString("bac_menu"), "Arial", 48);
+	back_label->setColor(ccc3(0, 255, 0));
+	CCMenuItemLabel * back_labelItem = CCMenuItemLabel::create(back_label, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
+	back_labelItem->setPosition(ccp(CONTENT_WIDTH/2, CONTENT_HEIGHT/2));
+	CCMenu* pMenu = CCMenu::create(back_labelItem, NULL);
+	pMenu->setPosition(CCPointZero);
+	addChild(pMenu, 5);
+	
+}
+
+
+cocos2d::CCPoint CMap::toTiledPos(cocos2d::CCPoint &pos)
+{
+
+	CCSize tiledSize = getTileSize();
+	CCSize mapSize = getMapSize();
+
+	pos.x = (int)(pos.x / tiledSize.width)*tiledSize.width + tiledSize.width / 2;
+	pos.y = (int)(pos.y / tiledSize.height)*tiledSize.height + tiledSize.height / 2;
+
+	return pos;
+}
