@@ -172,9 +172,9 @@ void CMap::win(int ID)
 		addChild(draw, 5);
 	}
 
-	CCLabelTTF* back_label = CCLabelTTF::create(CStringTableMgr::getString("bac_menu"), "Arial", 48);
-	back_label->setColor(ccc3(0, 255, 0));
-	CCMenuItemLabel * back_labelItem = CCMenuItemLabel::create(back_label, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
+	CCSprite* exit = CCSprite::create("back.png");
+	CCMenuItemSprite * back_labelItem = CCMenuItemSprite::create(exit, exit, exit, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
+	back_labelItem->setScale(0.4);
 	back_labelItem->setPosition(ccp(CONTENT_WIDTH/2, CONTENT_HEIGHT/2));
 	CCMenu* pMenu = CCMenu::create(back_labelItem, NULL);
 	pMenu->setPosition(CCPointZero);

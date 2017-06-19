@@ -4,8 +4,12 @@
 
 void CMapScene::onEnterScene(int i)
 {
-	CCLabelTTF* title_label = CCLabelTTF::create(CStringTableMgr::getString("map"), "Arial", 36);
-	title_label->setColor(ccc3(0, 255, 0));
+	CCSprite* backGround = CCSprite::create("timg.jpg");
+	backGround->setPosition(ccp(FRAME_WIDTH / 2, FRAME_HEIGHT / 2));
+	mRootLayer->addChild(backGround);
+
+	CCLabelTTF* title_label = CCLabelTTF::create("Please Choose", "Arial", 36);
+	title_label->setColor(ccc3(255, 255, 255));
 	CCMenuItemLabel* title_labelItem = CCMenuItemLabel::create(title_label);
 	title_labelItem->setPosition(FRAME_WIDTH / 2, FRAME_HEIGHT / 2 + 200);
 
@@ -19,9 +23,8 @@ void CMapScene::onEnterScene(int i)
 	map2_item->setColor(ccc3(255, 255, 255));
 	map2_item->setPosition(FRAME_WIDTH / 2 + 150, FRAME_HEIGHT / 2);
 
-	CCLabelTTF* back_label = CCLabelTTF::create(CStringTableMgr::getString("main_menu"), "Arial", 36);
-	back_label->setColor(ccc3(0, 255, 0));
-	CCMenuItemLabel * back_labelItem = CCMenuItemLabel::create(back_label, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
+	CCSprite* menu = CCSprite::create("menu.png");
+	CCMenuItemSprite * back_labelItem = CCMenuItemSprite::create(menu, menu, menu, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
 	back_labelItem->setPosition(FRAME_WIDTH / 2, FRAME_HEIGHT / 2 - 200);
 
 	CCMenu* pMenu = CCMenu::create(title_labelItem , back_labelItem ,map1_item ,map2_item , NULL);
