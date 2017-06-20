@@ -14,9 +14,6 @@
     <Filter Include="Classes\Scenes">
       <UniqueIdentifier>{366e9455-9042-435f-8995-4d58c02aac82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\XML">
-      <UniqueIdentifier>{d03368f7-91c7-42ad-9351-4471cb708806}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameObject">
       <UniqueIdentifier>{a0d83ce7-eab5-4180-82b2-4c047ce8d269}</UniqueIdentifier>
     </Filter>
@@ -53,9 +50,6 @@
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>win32</Filter>
     </ClInclude>
@@ -71,15 +65,6 @@
     <ClInclude Include="..\Classes\BaseDef.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\tinystr.h">
-      <Filter>Classes\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\tinyxml.h">
-      <Filter>Classes\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameUtils.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\BaseScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
@@ -92,13 +77,25 @@
     <ClInclude Include="..\Classes\player.h">
       <Filter>Classes\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\bomb.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\item.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\map.h">
+      <Filter>Classes\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MapScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\music.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameLogic.cpp">
       <Filter>Classes</Filter>
@@ -109,23 +106,26 @@
     <ClCompile Include="..\Classes\PlayScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\tinystr.cpp">
-      <Filter>Classes\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\tinyxml.cpp">
-      <Filter>Classes\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\tinyxmlerror.cpp">
-      <Filter>Classes\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\tinyxmlparser.cpp">
-      <Filter>Classes\XML</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Animation.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\player.cpp">
       <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\bomb.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\item.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\map.cpp">
+      <Filter>Classes\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MapScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\music.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,0 @@
-<config>
-	<test str="test string"/>
-	<test>12345</test>
-</config>

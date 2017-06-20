@@ -139,28 +139,29 @@
     <ClInclude Include="..\Classes\BaseDef.h" />
     <ClInclude Include="..\Classes\BaseScene.h" />
     <ClInclude Include="..\Classes\BeginScene.h" />
+    <ClInclude Include="..\Classes\bomb.h" />
     <ClInclude Include="..\Classes\GameLogic.h" />
-    <ClInclude Include="..\Classes\GameUtils.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\item.h" />
+    <ClInclude Include="..\Classes\map.h" />
+    <ClInclude Include="..\Classes\MapScene.h" />
     <ClInclude Include="..\Classes\MenuSelectHandler.h" />
+    <ClInclude Include="..\Classes\music.h" />
     <ClInclude Include="..\Classes\player.h" />
     <ClInclude Include="..\Classes\PlayScene.h" />
-    <ClInclude Include="..\Classes\tinystr.h" />
-    <ClInclude Include="..\Classes\tinyxml.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\Animation.cpp" />
     <ClCompile Include="..\Classes\BeginScene.cpp" />
+    <ClCompile Include="..\Classes\bomb.cpp" />
     <ClCompile Include="..\Classes\GameLogic.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\item.cpp" />
+    <ClCompile Include="..\Classes\map.cpp" />
+    <ClCompile Include="..\Classes\MapScene.cpp" />
+    <ClCompile Include="..\Classes\music.cpp" />
     <ClCompile Include="..\Classes\player.cpp" />
     <ClCompile Include="..\Classes\PlayScene.cpp" />
-    <ClCompile Include="..\Classes\tinystr.cpp" />
-    <ClCompile Include="..\Classes\tinyxml.cpp" />
-    <ClCompile Include="..\Classes\tinyxmlerror.cpp" />
-    <ClCompile Include="..\Classes\tinyxmlparser.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

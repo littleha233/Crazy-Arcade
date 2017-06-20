@@ -7,7 +7,7 @@
 
 void CBeginScene::onEnterScene(int i)
 {
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Begin.mp3",true);
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Prepare.mp3",true);
 
 	CCSprite* backGround = CCSprite::create("Pic/timg.jpg");
 	backGround->setScale(0.78);
