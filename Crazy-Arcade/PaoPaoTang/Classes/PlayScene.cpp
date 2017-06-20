@@ -15,25 +15,13 @@ m_pMap(NULL)
 void CPlayScene::onEnterScene(int i)
 {
 	mRootLayer->setAnchorPoint(CCPointZero);
-	/*CCSprite* pBG = CCSprite::create("Pic/BG.png");
-	pBG->setAnchorPoint(CCPointZero);
-	mRootLayer->addChild(pBG,2);*/
-	/**************动画小测试*****************/
 
-	//CCAnimation* animation=CCAnimationCache::sharedAnimationCache()->animationByName("Pic/Role1.png0");//提取动画
-	//CCAnimate* animate=CCAnimate::create(animation);//创建动作
-	//CCSprite* sp=CCSprite::create();
-	//sp->setPosition(ccp(FRAME_WIDTH/2,FRAME_HEIGHT*0.7));
-	//mRootLayer->addChild(sp);
-	//sp->runAction(animate);
 	if (MAPTAG == 1)m_pMap = CMap::initTileMap("amap1.tmx",this);
 	if (MAPTAG == 2)m_pMap = CMap::initTileMap("amap2.tmx", this);
 
 	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
-	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Play.mp3", true);
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Snd/bg/Village.mp3", true);
 
-	/*amap->addChild(hero.getSprite(),3);*/
-	/**************动画小测试*****************/
 
 	CCSprite* exit = CCSprite::create("back.png");
 	CCMenuItemSprite * back_labelItem = CCMenuItemSprite::create(exit, exit, exit, CMenuSelectHandler::sharedHandler(), menu_selector(CMenuSelectHandler::onMenu_Back2Menu));
